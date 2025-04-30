@@ -3,11 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Maven1.Project1.TestCase3_addtocart">
+      <class name="Maven1.Project1.TestCase6_SearchwithFilters">
         <methods>
-          <include name="login"/>
+          <include name="searchwithfilters"/>
+          <include name="quitBrowser"/>
+          <include name="launchBrowser"/>
         </methods>
-      </class> <!-- Maven1.Project1.TestCase3_addtocart -->
+      </class> <!-- Maven1.Project1.TestCase6_SearchwithFilters -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
