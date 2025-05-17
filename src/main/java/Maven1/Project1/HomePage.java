@@ -13,121 +13,124 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 
-	WebDriver driver;
-	WebDriverWait wait;
-	@FindBy(xpath = "//span[@class='nav-line-2 ']")
-	WebElement accountandlist_hoverover;
+    WebDriver driver;
+    WebDriverWait wait;
 
-	@FindBy(xpath = "//span[.='Sign in']")
-	WebElement signinbutton;
+    // Locate elements on the homepage using @FindBy annotations
+    @FindBy(xpath = "//span[@class='nav-line-2 ']")
+    WebElement accountandlist_hoverover;
 
-	@FindBy(xpath = "//a[@class='nav-a']")
-	WebElement newuser;
+    @FindBy(xpath = "//span[.='Sign in']")
+    WebElement signinbutton;
 
-	@FindBy(id = "twotabsearchtextbox")
-	WebElement searchtf;
+    @FindBy(xpath = "//a[@class='nav-a']")
+    WebElement newuser;
 
-	@FindBy(css = "span.a-button.a-button-span11.a-button-base.a-button-small > span.a-button-inner > a.a-button-text")
-	WebElement hpgotocart_button;
+    @FindBy(id = "twotabsearchtextbox")
+    WebElement searchtf;
 
-	@FindBy(xpath = "(//i[@class='a-icon a-icon-checkbox'])[3]")
-	WebElement chbxgetin2days;
+    @FindBy(css = "span.a-button.a-button-span11.a-button-base.a-button-small > span.a-button-inner > a.a-button-text")
+    WebElement hpgotocart_button;
 
-	@FindBy(xpath = "(//i[@class='a-icon a-icon-checkbox'])[4]")
-	WebElement chbxbrndapple;
+    @FindBy(xpath = "(//i[@class='a-icon a-icon-checkbox'])[3]")
+    WebElement chbxgetin2days;
 
-	@FindBy(linkText = "GPS")
-	WebElement chbxbgps;
+    @FindBy(xpath = "(//i[@class='a-icon a-icon-checkbox'])[4]")
+    WebElement chbxbrndapple;
 
-	@FindBy(linkText = "OLED")
-	WebElement chbxoled;
+    @FindBy(linkText = "GPS")
+    WebElement chbxbgps;
 
-	@FindBy(id = "p_36/range-slider_slider-item_lower-bound-slider")
-	WebElement minSlider;
+    @FindBy(linkText = "OLED")
+    WebElement chbxoled;
 
-	@FindBy(linkText = "Fitness")
-	WebElement chbxfitness;
+    @FindBy(id = "p_36/range-slider_slider-item_lower-bound-slider")
+    WebElement minSlider;
 
-	@FindBy(css = "span.a-dropdown-prompt")
-	WebElement sortDropdownPrompt;
+    @FindBy(linkText = "Fitness")
+    WebElement chbxfitness;
 
-	@FindBy(xpath = "(//h2[@class='a-size-base-plus a-spacing-none a-color-base a-text-normal'])[4]")
-	WebElement clickprod;
+    @FindBy(css = "span.a-dropdown-prompt")
+    WebElement sortDropdownPrompt;
 
-	@FindBy(xpath = "//span[.='Returns']")
-	WebElement orders;
+    @FindBy(xpath = "(//a[contains(@class, 'a-link-normal')]/descendant::h2)[1]")
+    WebElement clickprod;
 
-	// Constructor
-	public HomePage(WebDriver driver) {
+    @FindBy(xpath = "//span[.='Returns']")
+    WebElement orders;
 
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
+    // Constructor to initialize elements and WebDriverWait
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // WebDriverWait initialization
+        PageFactory.initElements(driver, this); // Initialize the elements
+    }
 
-	public void accountandlist() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(accountandlist_hoverover).perform();
-	}
+    // Hover over the account and list section
+    public void accountandlist() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(accountandlist_hoverover).perform();
+    }
 
-	public void signin_button() {
-		new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(signinbutton))
-				.click();
-	}
+    // Click the Sign In button
+    public void signin_button() {
+        wait.until(ExpectedConditions.elementToBeClickable(signinbutton)).click();
+    }
+    // Click the New User link
+    public void newuser() {
+        wait.until(ExpectedConditions.elementToBeClickable(newuser)).click();
+    }
 
-	public void newuser() {
-		new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(newuser))
-				.click();
-	}
+    // Search for a product
+    public void searchaprod(String productName) {
+        searchtf.sendKeys(productName + Keys.ENTER);
+    }
 
-	public void searchaprod(String productName) {
-		// searchtf.clear();
-		searchtf.sendKeys(productName + Keys.ENTER);
-	}
+    // Click on the first product
+    public void clickProduct() {
+        wait.until(ExpectedConditions.elementToBeClickable(clickprod)).click();
+    }
 
-	public void clickProduct() {
-		wait.until(ExpectedConditions.elementToBeClickable(clickprod));
-		clickprod.click();
-	}
+    // Select the "Get it in 2 days" checkbox
+    public void checkbox2days() {
+        wait.until(ExpectedConditions.elementToBeClickable(chbxgetin2days)).click();
+    }
 
-	public void checkbox2days() {
-		wait.until(ExpectedConditions.elementToBeClickable(chbxgetin2days));
-		chbxgetin2days.click();
-	}
+    // Select the "Apple" brand checkbox
+    public void checkboxApple() {
+        wait.until(ExpectedConditions.elementToBeClickable(chbxbrndapple)).click();
+    }
 
-	public void checkboxApple() {
-		wait.until(ExpectedConditions.elementToBeClickable(chbxbrndapple));
-		chbxbrndapple.click();
-	}
+    // Select the "GPS" checkbox
+    public void checkboxGPS() {
+        wait.until(ExpectedConditions.elementToBeClickable(chbxbgps)).click();
+    }
 
-	public void checkboxGPS() {
-		wait.until(ExpectedConditions.elementToBeClickable(chbxbgps));
-		chbxbgps.click();
-	}
+    // Select the "OLED" checkbox
+    public void checkboxOLED() {
+        wait.until(ExpectedConditions.elementToBeClickable(chbxoled)).click();
+    }
 
-	public void checkboxOLED() {
-		wait.until(ExpectedConditions.elementToBeClickable(chbxoled));
-		chbxoled.click();
-	}
+    // Click the "Go to Cart" button on the homepage
+    public void gotocarthp() {
+        wait.until(ExpectedConditions.elementToBeClickable(hpgotocart_button)).click();
+    }
 
-	public void gotocarthp() {
-		wait.until(ExpectedConditions.elementToBeClickable(hpgotocart_button));
-		hpgotocart_button.click();
-	}
+    // Select a sort option from the dropdown
+    public void selectSortOption(String sortOption) {
+        sortDropdownPrompt.click(); // Click the sort dropdown
+        By options = By.partialLinkText(sortOption); // Locate the sort option
+        wait.until(ExpectedConditions.elementToBeClickable(options)).click(); // Wait for the option to be clickable and click it
+    }
 
-	public void selectSortOption(String sortOption) {
-		sortDropdownPrompt.click();
-		By options = By.partialLinkText(sortOption);
-		wait.until(ExpectedConditions.elementToBeClickable(options)).click();
-	}
+    // Get the current sort option from the dropdown
+    public String getCurrentSortOption() {
+        WebElement selectedOption = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span.a-dropdown-prompt")));
+        return selectedOption.getText();
+    }
 
-	public String getCurrentSortOption() {
-		WebElement selectedOption = wait
-				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span.a-dropdown-prompt")));
-		return selectedOption.getText();
-	}
-
-	public void returnsorders() {
-		orders.click();
-	}
-
+    // Click on the 'Returns' section
+    public void returnsorders() {
+        orders.click(); // Click the returns orders section
+    }
 }

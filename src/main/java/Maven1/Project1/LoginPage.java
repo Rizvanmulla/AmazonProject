@@ -1,15 +1,20 @@
 package Maven1.Project1;
 import java.io.IOException;
+import java.time.Duration;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends UtilityPage {
-	WebDriver driver;
-   
+    WebDriver driver;
+    WebDriverWait wait;
+
+    // WebElement declarations
     @FindBy(name = "email")
     WebElement username;
 
@@ -39,75 +44,85 @@ public class LoginPage extends UtilityPage {
 
     @FindBy(xpath = "(//button[text()='Save'])[2]")
     WebElement save_hw;
-    
-    @FindBy(className="a-alert-content")
+
+    @FindBy(className = "a-alert-content")
     WebElement errorMessage;
 
-    // Constructor
+    // Constructor for initializing WebDriver, PageFactory, and wait
     public LoginPage(WebDriver driver) throws EncryptedDocumentException, IOException {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-      
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        // Attempt to fetch data
         try {
-        	  datafetch();
-         
+            datafetch();
         } catch (Exception e) {
             System.out.println("Failed to fetch data: " + e.getMessage());
         }
     }
 
     // Action Methods
-    public void un() {
-    	
+
+    public void Username() {
+        wait.until(ExpectedConditions.visibilityOf(username));
         username.sendKeys(uname);
     }
 
-    public void cont_button() {
+    public void clickContinueButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(cont));
         cont.click();
     }
 
-    public void pwd() {
+    public void Password() {
+        wait.until(ExpectedConditions.visibilityOf(pass));
         pass.sendKeys(pwd);
     }
 
-    public void signin() {
+    public void clickSignInButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(signin));
         signin.click();
     }
 
     public void clickManageProfile() {
+        wait.until(ExpectedConditions.elementToBeClickable(manageprofile));
         manageprofile.click();
     }
 
     public void clickViewProfile() {
+        wait.until(ExpectedConditions.elementToBeClickable(viewprofile));
         viewprofile.click();
     }
 
     public void clickHeightAndWeight() {
+        wait.until(ExpectedConditions.elementToBeClickable(hightnweight));
         hightnweight.click();
     }
 
     public void clickEditHeightWeight() {
+        wait.until(ExpectedConditions.elementToBeClickable(edit_hw));
         edit_hw.click();
     }
 
-    public void updateWeight() throws InterruptedException {
+    public void updateWeight(String newWeight) {
+        wait.until(ExpectedConditions.visibilityOf(newweight));
         newweight.clear();
-        newweight.sendKeys("95");
-        Thread.sleep(3000);
+        newweight.sendKeys(newWeight);
     }
 
-    public void clickSaveHW() {
+    public void clickSaveHeightWeight() {
         if (save_hw.isDisplayed() && save_hw.isEnabled()) {
             save_hw.click();
         }
     }
 
-	public void invalidPwd() {
-		
-		pass.sendKeys(invalidPwd);
-	}
+    public void InvalidPassword() {
+        wait.until(ExpectedConditions.visibilityOf(pass));
+        pass.sendKeys(invalidPwd);
+    }
 
-	public String getErrorMessage() {
-    return errorMessage.getText();
-}
+    public String getErrorMessage() {
+        wait.until(ExpectedConditions.visibilityOf(errorMessage));
+        return errorMessage.getText();
+    }
 }

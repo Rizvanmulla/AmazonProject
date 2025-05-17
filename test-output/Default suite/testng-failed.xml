@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Maven1.Project1.TestCase6_SearchwithFilters">
+      <class name="Maven1.Project1.TestCase1_Registration">
         <methods>
-          <include name="searchwithfilters"/>
+          <include name="register"/>
           <include name="quitBrowser"/>
           <include name="launchBrowser"/>
         </methods>
-      </class> <!-- Maven1.Project1.TestCase6_SearchwithFilters -->
+      </class> <!-- Maven1.Project1.TestCase1_Registration -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
