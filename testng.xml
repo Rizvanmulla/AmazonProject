@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
   <test thread-count="5" name="Test">
-  <parameter name="browsername" value="edge"></parameter>
+ <parameter name="browsername" value="chrome"></parameter>
     <classes>
       <class name="Maven1.Project1.TestCase14_rating"/>
       <class name="Maven1.Project1.TestCase1_Registration"/>
